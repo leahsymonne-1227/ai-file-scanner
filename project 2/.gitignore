@@ -1,0 +1,14 @@
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+googlesheet.venv/
+venv/
+
+# Local secrets and credentials
+.env
+*.service-account.json
+credentials.json
+
+# macOS metadata
+.DS_Store

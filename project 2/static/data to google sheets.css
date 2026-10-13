@@ -1,0 +1,395 @@
+:root {
+  color: #171717;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem 1rem;
+  display: grid;
+  place-items: center;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 128' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M0 16 C70 14 130 18 205 16 S330 14 405 16 S540 18 615 16 S735 14 810 16 S935 18 1000 16'/%3E%3Cpath d='M0 48 C85 50 145 46 225 48 S350 50 425 48 S550 46 630 48 S755 50 830 48 S950 46 1000 48'/%3E%3Cpath d='M0 80 C75 78 145 82 220 80 S345 78 420 80 S550 82 625 80 S750 78 825 80 S950 82 1000 80'/%3E%3Cpath d='M0 112 C65 114 145 110 215 112 S345 114 415 112 S545 110 620 112 S750 114 820 112 S945 110 1000 112'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 100% 128px;
+  background-position: 0 0;
+}
+h1 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 30px !important;
+}
+
+.container {
+  position: relative;
+  width: min(100%, 560px);
+  padding: 2rem 2.25rem;
+  border: 1.5px solid #222;
+  border-radius: 3px 5px 4px 2px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+
+.container::after {
+  position: absolute;
+  inset: 2px -2px -2px 2px;
+  border: 1px solid #222;
+  border-radius: 4px 2px 3px 5px;
+  content: "";
+  pointer-events: none;
+  transform: rotate(0.25deg);
+}
+
+.eyebrow {
+  margin: 0 0 0.2rem;
+  color: #555;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+.intro {
+  margin: 0.5rem 0 1.25rem;
+  color: #444;
+  font-size: 1.15rem;
+}
+
+form {
+  display: grid;
+  gap: 0.65rem;
+}
+
+label {
+  margin-top: 0.4rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #777;
+  border-radius: 2px;
+  padding: 0.7rem 0.75rem;
+  color: #171717;
+  background: #fff;
+  font: 1rem Arial, Helvetica, sans-serif;
+}
+
+input,
+select {
+  min-height: 46px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23171717' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem;
+}
+
+textarea {
+  min-height: 140px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+button {
+  justify-self: start;
+  min-height: 46px;
+  margin-top: 0.65rem;
+  border: 1.5px solid #222;
+  border-radius: 3px;
+  padding: 0.55rem 1.2rem;
+  color: #171717;
+  background: #fff;
+  box-shadow: 3px 3px 0 #222;
+  font: 600 1rem Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  transform: rotate(-0.5deg);
+}
+
+button:hover {
+  background: #f7f7f7;
+}
+
+button:active {
+  box-shadow: 1px 1px 0 #222;
+  transform: translate(2px, 2px) rotate(0);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 1.5rem;
+  }
+}
+
+.validation-message {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 0;
+  color: #187642;
+  font-size: 0.95rem;
+  line-height: 1;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.validation-message.is-visible {
+  min-height: 1.2rem;
+  opacity: 1;
+  visibility: visible;
+}
+
+.validation-check {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  opacity: 0;
+  transform: scale(0.45) rotate(-12deg);
+}
+
+.validation-check svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.validation-check path {
+  fill: none;
+  stroke: #187642;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 28;
+  stroke-dashoffset: 28;
+}
+
+.validation-message.is-visible .validation-check {
+  animation: validation-pop 360ms cubic-bezier(.2, 1.6, .4, 1) forwards;
+}
+
+.validation-message.is-visible .validation-check path {
+  animation: validation-draw 240ms ease-out 80ms forwards;
+}
+
+@keyframes validation-pop {
+  70% { opacity: 1; transform: scale(1.18) rotate(5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes validation-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .validation-message.is-visible .validation-check { animation: none; opacity: 1; transform: none; }
+  .validation-message.is-visible .validation-check path { animation: none; stroke-dashoffset: 0; }
+}
+
+/* Compact fields keep the full form visible without scrolling. */
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 0.75rem 1rem;
+}
+
+.container {
+  width: min(100%, 500px);
+  padding: 1.25rem 1.5rem;
+}
+
+h1 {
+  font-size: clamp(1.65rem, 5vw, 2rem);
+}
+
+.intro {
+  margin: 0.3rem 0 0.8rem;
+  font-size: 1rem;
+}
+
+form {
+  gap: 0.35rem;
+}
+
+label {
+  margin-top: 0.35rem;
+  font-size: 1rem;
+}
+
+.field-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+input,
+select {
+  min-height: 40px;
+  padding-block: 0.5rem;
+  padding-right: 8.25rem;
+  transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+textarea {
+  min-height: 86px;
+  height: 86px;
+  padding: 0.55rem 8.25rem 0.55rem 0.75rem;
+  line-height: 1.35;
+  transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+.field-wrap:focus-within input,
+.field-wrap:focus-within select,
+.field-wrap:focus-within textarea {
+  border-color: #333;
+  box-shadow: 2px 3px 0 rgb(0 0 0 / 12%);
+  transform: rotate(-0.15deg);
+}
+
+.validation-message {
+  position: absolute;
+  top: 50%;
+  right: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 0;
+  padding: 0.1rem 0.25rem;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 0.78rem;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.validation-message.is-visible {
+  min-height: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.validation-check {
+  width: 17px;
+  height: 17px;
+  flex-basis: 17px;
+}
+
+.review-wrap .validation-message {
+  top: 0.6rem;
+  transform: none;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  width: 16px;
+  height: 16px;
+  color: #222;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: transform 180ms ease;
+}
+
+.dropdown-arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.select-wrap select {
+  padding-right: 2.5rem;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 19px,
+    #ededed 20px,
+    transparent 21px
+  );
+  background-position: 0 0;
+  background-size: 100% 21px;
+}
+
+.select-wrap:focus-within .dropdown-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.select-wrap.is-valid .dropdown-arrow {
+  opacity: 0;
+}
+
+.select-wrap .validation-message {
+  right: 0.5rem;
+}
+
+button {
+  min-height: 40px;
+  margin-top: 0.5rem;
+  padding-block: 0.4rem;
+  transform: none;
+  transition: background-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+@media (max-height: 720px) {
+  body { padding-block: 0.35rem; }
+  .container { padding-block: 0.85rem; }
+  .eyebrow { margin-bottom: 0; }
+  .intro { margin-bottom: 0.45rem; }
+  form { gap: 0.2rem; }
+  label { margin-top: 0.2rem; }
+  textarea { min-height: 70px; height: 70px; }
+}
+
+@media (max-width: 520px) {
+  .container { padding: 1rem; }
+  input, select { padding-right: 7.5rem; }
+  textarea { padding-right: 7.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-arrow, input, select, textarea { transition: none; }
+}

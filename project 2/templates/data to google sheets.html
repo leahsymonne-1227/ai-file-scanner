@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data to Google Sheets</title>
+  <!-- <link rel="stylesheet" href="data to google sheets.css"> -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='data to google sheets.css') }}">
+</head>
+<body>
+  <main class="container">
+    <p class="eyebrow">CUSTOMER NOTES</p>
+    <h1>Leave a product review</h1>
+    <form action="/submit-review" method="post">
+      <label for="customer-name">Customer name</label>
+      <div class="field-wrap">
+        <input
+          id="customer-name"
+          name="customer_name"
+          type="text"
+          autocomplete="name"
+          placeholder="Your name"
+          required
+        >
+        <span class="validation-message" aria-live="polite"><span class="validation-check" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 12.5l5.2 5L20 6.8" /></svg></span><span>Looks good</span></span>
+      </div>
+
+      <label for="product">Product purchased</label>
+      <div class="field-wrap select-wrap">
+        <select id="product" name="product" required>
+          <option value="" disabled selected>Select a product</option>
+          <option value="everyday-tote">Everyday Tote</option>
+          <option value="ceramic-mug">Ceramic Mug</option>
+          <option value="classic-notebook">Classic Notebook</option>
+        </select>
+        <span class="dropdown-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3 6 5 5 5-5" /></svg></span>
+        <span class="validation-message" aria-live="polite"><span class="validation-check" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 12.5l5.2 5L20 6.8" /></svg></span><span>Looks good</span></span>
+      </div>
+
+      <label for="review">Your review</label>
+      <div class="field-wrap review-wrap">
+        <textarea
+          id="review"
+          name="review"
+          rows="4"
+          placeholder="Write your thoughts here…"
+          required
+        ></textarea>
+        <span class="validation-message" aria-live="polite"><span class="validation-check" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 12.5l5.2 5L20 6.8" /></svg></span><span>Looks good</span></span>
+      </div>
+
+      <button type="submit">Submit review</button>
+    </form>
+  </main>
+  <script>
+    document.querySelectorAll("form input, form select, form textarea").forEach((field) => {
+      const wrapper = field.closest(".field-wrap");
+      const message = wrapper.querySelector(".validation-message");
+      const setValidState = (isValid) => {
+        message.classList.toggle("is-visible", isValid);
+        wrapper.classList.toggle("is-valid", isValid);
+      };
+      field.addEventListener("blur", () => {
+        setValidState(field.value.trim() !== "" && field.checkValidity());
+      });
+      field.addEventListener("input", () => {
+        if (!field.checkValidity() || field.value.trim() === "") setValidState(false);
+      });
+      field.addEventListener("change", () => {
+        if (field.checkValidity() && field.value.trim() !== "") setValidState(true);
+      });
+    });
+  </script>
+</body>
+</html>
